@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burgos's Restaurant</title>
+    <!-- Preload styles for optimization -->
+    <link rel="preload" href="css/normalize.css" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playwrite+HR+Lijeva:wght@100..400&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preload" href="css/styles.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="icon" href="Img/logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="preloader">
+        <div class="spinner"></div>
+        <p>Cargando experiencia Burgos...</p>
+    </div>
+
+
+
+    <header class="cabecera">
+        <nav class="nav-bar">
+            <!-- Logo -->
+            <div class="logo">
+                <img class="logoModificar" src="Img/logo.svg" alt="Burgos's Restaurant Logo">
+            </div>
+
+            <!-- Navigation Links - Visible en desktop -->
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#sobre_nosotros">Sobre nosotros</a>
+                <a href="menu.html">Menú</a>
+                <a href="#Galeria">Galería</a>
+                <a href="biotienda.html">Biotienda</a>
+                <a href="#reserva">Reserva</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="nav-right-group">
+                <div class="nav-icons">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-carrito">
+                        <path d="M1 3h.89a2 2 0 011.953 1.574l2.178 9.985H18.5L20 5.813H4.114M10 18.87a2 2 0 11-4 0 2 2 0 014 0zm9 .004a2 2 0 11-4 0 2 2 0 014 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-idioma">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
+                        <path d="M3.6 9h16.8"/>
+                        <path d="M3.6 15h16.8"/>
+                        <path d="M11.5 3a17 17 0 0 0 0 18"/>
+                        <path d="M12.5 3a17 17 0 0 1 0 18"/>
+                    </svg>
+                    <div class="nav-sesion">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-usuario">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="10" r="3"/>
+                            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+                        </svg>
+                        <a href="#sesion">Sign in</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Hamburger Menu - Visible en móvil -->
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header> 
+
+<!-- Main Content -->
+
+
+    <main class="main">
+        <!-- Inicio Section -->
+        <section id="inicio" class="container1">
+            <div class="sombra"></div>
+
+            <!-- Main Content -->
+            <div class="contenido">
+                <div class="img_logo">
+                    <img src="Img/logo.svg" alt="Logo Burgos's Restaurant">
+                </div>
+                <div class="texto">
+                    <h1 class="titulo">Burgos's Restaurant</h1>
+                    <p class="subtitulo">La mejor comida de Burgos</p>
+                    <a href="#reserva" class="btn-reserva">Conoce la Historia</a>
+                </div>
+
+                <!-- Bubble Image -->
+                <div class="bubble_img">
+                    <img src="Img/intro-bg.jpg" alt="Establecimiento">
+                </div>
+            </div>
+        </section>
+
+        <!-- redes sociales -->
+ 
+        <!-- redes sociales_aqui termina -->
+
+
+
+        <!-- Contenedor 2 -->
+        <section id="sobre_nosotros" class="contenedor2">
+            <h2>Nuestro Restaurant</h2>    
+            <div class="nuestro-principal">
+
+                <div class="sobreN">
+                    <img src="Img/sobreNosotros1.jpg" alt="Burgos">
+                    <div class="info-nosotros">
+                        <span class="sobreN_titulo">Burgos</span>
+                        <p class="p_contenido">Experimente la calidez y comodidad de nuestros amplios espacios.</p>
+                    </div>
+                </div>
+
+                <div class="sobreN">
+                    <img src="Img/sobreNosotros2.jpg" alt="Bar">
+                    <div class="info-nosotros">
+                        <span class="sobreN_titulo">Bar</span>
+                        <p class="p_contenido">Deleitese con nuestros diversos tragos regionales, bebidas y una variada seleccion de vinos.</p>
+                    </div>
+                </div>
+
+                <div class="sobreN">
+                    <img src="Img/sobreNosotros3.jpg" alt="Zona Confort">
+                    <div class="info-nosotros">
+                        <span class="sobreN_titulo">Zona Confort</span>
+                        <p class="p_contenido">Pase un momento relajante en un lugar acojedor y disfrute de nuestros platos exclusivos.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!--Contenedor 3-->
+        <section class="biotienda">
+            <div class="biotienda-header">
+                <h2>BIOTIENDA BURGOS'S</h2>
+                <p>Disfrute de nuestros productos naturales. Pida y páguelo desde casa.</p>
+            </div>
+
+            <div class="productos-destacados">
+                <div class="producto">
+                    <img src="Img/store/01.png" alt="Pastas">
+                    <h3>Pastas</h3>
+                    <p>Aromáticas pastas para taza de granos de Copoazu, Cacao y Castañas, 100% orgánicas.</p>
+                    <button class="btn-comprar" data-producto="Pastas">COMPRAR</button>
+                </div>
+
+                <div class="producto">
+                    <img src="Img/store/02.png" alt="Salsas">
+                    <h3>Salsas</h3>
+                    <p>Pruebe de nuestras mejores Salsas Amazónicas.</p>
+                    <button class="btn-comprar" data-producto="Salsas">COMPRAR</button>
+                </div>
+
+                <div class="producto">
+                    <img src="Img/store/03.png" alt="Mermeladas">
+                    <h3>Mermeladas</h3>
+                    <p>Deguste los sabores de los frutos de la selva hechas mermeladas.</p>
+                    <button class="btn-comprar" data-producto="Mermeladas">COMPRAR</button>
+                </div>
+            </div>
+        </section>
+
+        <!--Contenedor 4_galeria-->
+
+        <section id="galeria" class="galeria-section">
+            <div class="galeria-hero">
+                <h2 class="galeria-title">GALERIA</h2>
+                <div class="galeria-barra"></div>
+                <p class="galeria-desc">Vea nuestros deliciosos platos hechos con insumos nativos de nuestra región.</p>
+            </div>
+            <div class="galeria-filtros">
+                <button class="galeria-filtro active" data-filter="todos">TODOS</button>
+                <button class="galeria-filtro" data-filter="regional">REGIONAL</button>
+                <button class="galeria-filtro" data-filter="pescado">PESCADO</button>
+                <button class="galeria-filtro" data-filter="casa">CASA</button>
+            </div>
+
+            <div class="galeria-grid">
+                <div class="galeria-item" data-cat="regional">
+                    <img src="Img/menu/Cecina.png"alt="Cecina">
+                </div>
+                <div class="galeria-item" data-cat="pescado">
+                    <img src="Img/menu/Estofado de gallina.png" alt="Estofado de gallina">
+                </div>
+                <div class="galeria-item" data-cat="regional">
+                    <img src="Img/menu/Juane burgos.png" alt="Juane burgos">
+                </div>
+                <div class="galeria-item" data-cat="casa">
+                    <img src="Img/menu/Pescado en hoja.png" alt="Pescado en hoja">
+                </div>
+                <div class="galeria-item" data-cat="pescado">
+                    <img src="Img/menu/Pescado o Palmito.png" alt="Pescado o Palmito">
+                </div>
+                <div class="galeria-item" data-cat="casa">
+                    <img src="Img/menu/Pescado o Solo.png" alt="Pescado o Solo">
+                </div>
+
+
+            </div>
+            <!-- Modal para imagen ampliada -->
+            <div class="galeria-modal" id="galeriaModal">
+                <span class="galeria-cerrar" id="cerrarModal">&times;</span>
+                <img class="galeria-modal-img" id="modalImg" src="" alt="">
+            </div>
+        </section>
+
+
+        <!--Contenedor 5-->
+        <section class="reserva">
+            <div class="reserva-header">
+                <img src="Img/logo.svg" alt="Burgos's Logo" class="reserva-logo">
+                <h2>Reserva</h2>
+            </div>
+
+            <div class="reserva-steps">
+                <div class="step active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                    class="step-icon"><path d="M8 2v4"/><path d="M16 2v4"/><rect 
+                    width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    <span>Fecha</span>
+                </div>
+                <div class="step">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                    class="step-icon"><path stroke="none" d="M0 0h24v24H0z" 
+                    fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 12l-3 2"/><path d="M12 7v5"/></svg>
+                    <span>Hora</span>
+                </div>
+                <div class="step">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="step-icon"><path 
+                    stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"/><path 
+                    d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 10h2a2 2 0 0 1 2 2v1"/><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M3 13v-1a2 2 0 0 1 2 -2h2"/></svg>
+                    <span>Invitados</span>
+                </div>
+                <div class="step">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                    stroke-linejoin="round" class="step-icon"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></svg>
+                    <span>Completar</span>
+                </div>
+            </div>
+
+            <div class="reserva-date">
+                <h3>Seleccione la fecha de su reserva</h3>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <button class="prev-month">&laquo;</button>
+                        <span class="month-year">Junio 2025</span>
+                        <button class="next-month">&raquo;</button>
+                    </div>
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Do</th>
+                                <th>Lu</th>
+                                <th>Ma</th>
+                                <th>Mi</th>
+                                <th>Ju</th>
+                                <th>Vi</th>
+                                <th>Sa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Las fechas se generarán dinámicamente con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        
+    </main>
+
+
+
+    <!-- Footer Burgos's Restaurant -->
+    <footer class="footer-burgos">
+        <div class="footer-container">
+            <div class="footer-logo-col">
+                <img src="Img/logo.svg" alt="Burgos's Restaurant Logo" class="footer-logo">
+                <p class="footer-brand">Burgos's Restaurant</p>
+            </div>
+            <div class="footer-links-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre_nosotros">Sobre Nosotros</a></li>
+                    <li><a href="menu.html">Menú</a></li>
+                    <li><a href="biotienda.html">Biotienda</a></li>
+                    <li><a href="#reserva">Reserva</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li>Calle Principal 123, Burgos, España</li>
+                    <li>info@burgosrestaurant.com</li>
+                    <li>+34 600 123 456</li>
+                </ul>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" /></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M16.5 7.5v.01" /></svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-youtube"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1 -5 5h-12a5 5 0 0 1 -5 -5v-8a5 5 0 0 1 5 -5zm-9 6v6a1 1 0 0 0 1.514 .857l5 -3a1 1 0 0 0 0 -1.714l-5 -3a1 1 0 0 0 -1.514 .857z" /></svg>
+                </a>
+            </div>
+
+            </div>
+        </div>
+        <div class="footer-copy">
+            &copy; 2025 Burgos's Restaurant. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!--redes sociales_nuevo
+    <div class="social-float">
+    <a href="#" class="social-float-item">
+        <div class="social-float-text">Burgos's</div>
+        <div class="social-float-badge restaurant">🍴</div>
+    </a>
+    <a href="#" class="social-float-item">
+        <div class="social-float-text">YouTube</div>
+        <div class="social-float-badge youtube">▶️</div>
+    </a>
+    <a href="#" class="social-float-item">
+        <div class="social-float-text">Instagram</div>
+        <div class="social-float-badge instagram">📷</div>
+    </a>
+</div>-->
+
+
+
+    <script src="js/main.js"></script>
+    <script src="js/preloader.js"></script>
+</body>
+</html>

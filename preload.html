@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preloader Ramen</title>
+    <style>
+        /* Estilo general del preloader */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 24px;
+        }
+
+        /* Sartén (círculo blanco como ejemplo) */
+        .pan {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: white;
+            margin-bottom: 20px;
+            animation: sway 1s infinite alternate ease-in-out;
+            position: relative;
+        }
+
+        /* Huevito (círculo pequeño flotando arriba del sartén) */
+        .egg {
+            width: 30px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            top: -30px;
+            left: 35px;
+            animation: jump 1s infinite ease-in-out;
+        }
+
+        /* Animación de movimiento del sartén */
+        @keyframes sway {
+            0% { transform: rotate(-10deg); }
+            100% { transform: rotate(10deg); }
+        }
+
+        /* Animación de salto del huevo */
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Contenido de la página (oculto al inicio) */
+        #content {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="pan">
+            <div class="egg"></div>
+        </div>
+        <div id="progress">Cooking your ramen... 0%</div>
+    </div>
+
+    <!-- Contenido de la página -->
+    <div id="content">
+        <h1>¡Bienvenido a la página!</h1>
+        <p>Ahora puedes ver el contenido.</p>
+    </div>
+
+    <!-- Script para simular la carga -->
+    <script>
+        let progress = 0;
+        let interval = setInterval(() => {
+            progress += 1;
+            document.getElementById("progress").innerText = `Cooking your ramen... ${progress}%`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                document.getElementById("preloader").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            }
+        }, 50); // velocidad de carga (más rápida o más lenta)
+    </script>
+
+</body>
+</html>

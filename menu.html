@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Burgos's</title>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="icon" href="Img/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playwrite+HR+Lijeva:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header consistente con el sitio principal -->
+    <header class="menu-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="Img/logo.svg" alt="Burgos's Restaurant Logo">
+            </div>
+            <h1>Nuestro Menú</h1>
+            <p class="subtitle">Sabores auténticos de Burgos</p>
+        </div>
+    </header>
+
+    <main class="menu-container">
+        <!-- Filtros mejorados -->
+        <div class="filters-container">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <button class="filter-btn" data-filter="entradas">Entradas</button>
+                <button class="filter-btn" data-filter="platos-fuertes">Platos Fuertes</button>
+                <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+                <button class="filter-btn" data-filter="postres">Postres</button>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar platillo..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+
+        <!-- Sección de categorías -->
+        <section class="category-section" id="entradas">
+            <h2 class="category-title">🍽️ Entradas</h2>
+            <div class="menu-grid">
+                <!-- Ejemplo de tarjeta mejorada -->
+                <div class="menu-card" data-category="entradas">
+                    <div class="card-badge">Recomendado</div>
+                    <img src="Img/menu/Cecina.png" alt="Cecina" class="menu-img">
+                    <div class="menu-info">
+                        <div class="title-wrapper">
+                            <h3 class="menu-title">Cecina</h3>
+                            <span class="menu-price">$10.00</span>
+                        </div>
+                        <p class="menu-description">Deliciosa carne seca típica de la región, acompañada de yuca y salsa criolla.</p>
+                        <div class="menu-footer">
+                            <span class="menu-category">Entrada</span>
+                            <button class="add-to-cart">+ Añadir</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Más tarjetas de entradas... -->
+            </div>
+        </section>
+
+        <section class="category-section" id="platos-fuertes">
+            <h2 class="category-title">🍛 Platos Fuertes</h2>
+            <div class="menu-grid">
+                <!-- Ejemplo de plato fuerte -->
+                <div class="menu-card" data-category="platos-fuertes">
+                    <img src="Img/menu/Estofado de gallina.png" alt="Estofado de gallina" class="menu-img">
+                    <div class="menu-info">
+                        <div class="title-wrapper">
+                            <h3 class="menu-title">Estofado de Gallina</h3>
+                            <span class="menu-price">$14.50</span>
+                        </div>
+                        <p class="menu-description">Gallina criolla cocinada a fuego lento con especias tradicionales y acompañada de arroz.</p>
+                        <div class="menu-footer">
+                            <span class="menu-category">Plato Principal</span>
+                            <button class="add-to-cart">+ Añadir</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Más platos fuertes... -->
+            </div>
+        </section>
+
+        <!-- Otras categorías... -->
+    </main>
+
+    <!-- Carrito flotante -->
+    <div class="floating-cart">
+        <span class="cart-count">0</span>
+        <img src="Img/shopping-cart.png" alt="Carrito de compras">
+    </div>
+
+    <script src="js/menu.js"></script>
+</body>
+</html>
+

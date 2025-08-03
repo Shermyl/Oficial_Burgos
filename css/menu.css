@@ -1,0 +1,317 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #E74C3C;
+    --accent-color: #F39C12;
+    --light-color: #ECF0F1;
+    --dark-color: #2C3E50;
+    --text-color: #333;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Playwrite HR Lijeva', sans-serif;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+.menu-header {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../Img/menu-bg.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-header .logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.menu-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Caveat', cursive;
+}
+
+.menu-header .subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+}
+
+/* Filtros y búsqueda */
+.filters-container {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 50px 0 0 50px;
+    font-size: 1.4rem;
+    width: 250px;
+}
+
+.search-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Categorías */
+.category-section {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+}
+
+.category-title {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: var(--dark-color);
+    font-family: 'Caveat', cursive;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Tarjetas de menú */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.menu-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.menu-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-info {
+    padding: 1.8rem;
+}
+
+.title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.menu-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.menu-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.menu-description {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    min-height: 60px;
+}
+
+.menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-category {
+    font-size: 1.2rem;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+}
+
+.add-to-cart {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-to-cart:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Carrito flotante */
+.floating-cart {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: var(--transition);
+    z-index: 100;
+}
+
+.floating-cart:hover {
+    transform: scale(1.1);
+}
+
+.floating-cart img {
+    width: 30px;
+    height: 30px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--secondary-color);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-header h1 {
+        font-size: 2.8rem;
+    }
+    
+    .menu-header .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .filters {
+        justify-content: center;
+    }
+    
+    .menu-card {
+        max-width: 100%;
+    }
+}
