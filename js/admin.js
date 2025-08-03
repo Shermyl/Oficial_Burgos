@@ -838,7 +838,172 @@ document.addEventListener('sectionChanged', function(e) {
 
 
 
+// GESTION DE PRODUCTOS_index.html del admin
+// Gestión de productos
+document.addEventListener('DOMContentLoaded', async () => {
+    // Verificar sesión
+    const { user, error } = await supabase.auth.getUser();
+    if (error || !user) {
+        window.location.href = '../login.html';
+        return;
+    }
+    
+    // Cargar productos
+    await loadProducts();
+    
+    // Manejar formulario
+    document.getElementById('product-form').addEventListener('submit', handleProductSubmit);
+    document.getElementById('cancel-edit').addEventListener('click', resetForm);
+});
 
+async function loadProducts() {
+    const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('category', { ascending: true })
+        .order('name', { ascending: true });
+    
+    if (error) {
+        console.error('Error loading products:', error);
+        return;
+    }
+    
+    const tbody = document.querySelector('#products-table tbody');
+    tbody.innerHTML = '';
+    
+    data.forEach(product => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${product.name}</td>
+            <td>S/ ${product.price.toFixed(2)}</td>
+            <td>${product.category}</td>
+            <td class="actions">
+                <button class="btn-edit" data-id="${product.id}">Editar</button>
+                <button class="btn-delete" data-id="${product.id}">Eliminar</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    // Agregar event listeners a los botones
+    document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', () => editProduct(btn.dataset.id));
+    });
+    
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', () => deleteProduct(btn.dataset.id));
+    });
+}
+
+async function editProduct(productId) {
+    const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', productId)
+        .single();
+    
+    if (error) {
+        console.error('Error loading product:', error);
+        return;
+    }
+    
+    // Llenar formulario
+    document.getElementById('product-id').value = data.id;
+    document.getElementById('product-name').value = data.name;
+    document.getElementById('product-price').value = data.price;
+    document.getElementById('product-category').value = data.category;
+    document.getElementById('product-description').value = data.description || '';
+    
+    // Scroll al formulario
+    document.querySelector('.product-form-container').scrollIntoView();
+}
+
+async function handleProductSubmit(e) {
+    e.preventDefault();
+    
+    const productId = document.getElementById('product-id').value;
+    const productData = {
+        name: document.getElementById('product-name').value,
+        price: parseFloat(document.getElementById('product-price').value),
+        category: document.getElementById('product-category').value,
+        description: document.getElementById('product-description').value,
+        updated_at: new Date().toISOString()
+    };
+    
+    // Manejar imagen si se subió
+    const imageFile = document.getElementById('product-image').files[0];
+    if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `${fileName}`;
+        
+        // Subir imagen
+        const { error: uploadError } = await supabase.storage
+            .from('product-images')
+            .upload(filePath, imageFile);
+        
+        if (!uploadError) {
+            // Obtener URL pública
+            const { publicURL } = supabase.storage
+                .from('product-images')
+                .getPublicUrl(filePath);
+            
+            productData.image_url = publicURL;
+        }
+    }
+    
+    try {
+        if (productId) {
+            // Actualizar producto existente
+            const { error } = await supabase
+                .from('products')
+                .update(productData)
+                .eq('id', productId);
+            
+            if (error) throw error;
+        } else {
+            // Crear nuevo producto
+            productData.created_at = new Date().toISOString();
+            const { error } = await supabase
+                .from('products')
+                .insert([productData]);
+            
+            if (error) throw error;
+        }
+        
+        // Recargar productos y resetear formulario
+        await loadProducts();
+        resetForm();
+        
+    } catch (error) {
+        console.error('Error saving product:', error);
+        alert('Error al guardar el producto: ' + error.message);
+    }
+}
+
+function resetForm() {
+    document.getElementById('product-form').reset();
+    document.getElementById('product-id').value = '';
+    document.getElementById('product-image').value = '';
+}
+
+async function deleteProduct(productId) {
+    if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+    
+    try {
+        const { error } = await supabase
+            .from('products')
+            .delete()
+            .eq('id', productId);
+        
+        if (error) throw error;
+        
+        await loadProducts();
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        alert('Error al eliminar el producto: ' + error.message);
+    }
+}
 
 
 
