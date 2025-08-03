@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -95,6 +92,101 @@
         <span class="cart-count">0</span>
         <img src="Img/shopping-cart.png" alt="Carrito de compras">
     </div>
+
+    <!--Sistema de pedidos - parte CLIENTE-->
+        <div id="cart-container">
+        <h3>Tu Pedido</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: S/ <span id="cart-total">0.00</span></p>
+        
+        <form id="checkout-form">
+            <input type="text" id="customer-name" placeholder="Nombre completo" required>
+            <input type="tel" id="customer-phone" placeholder="Teléfono" required>
+            <textarea id="delivery-address" placeholder="Dirección de entrega" required></textarea>
+            
+            <select id="payment-method">
+            <option value="cash">Efectivo</option>
+            <option value="yape">Yape</option>
+            </select>
+            
+            <div id="yape-qr-container" style="display:none;">
+            <p>Escanea este código para pagar:</p>
+            <div id="yape-qr"></div>
+            </div>
+            
+            <button type="submit">Confirmar Pedido</button>
+        </form>
+        </div>
+
+        <script type="module">
+        import { placeOrder } from './js/database.js';
+        import QRCode from 'https://esm.sh/qrcode.react';
+        
+        // Manejo del carrito
+        let cart = [];
+        
+        // Función para actualizar el carrito en la UI
+        function updateCartUI() {
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            
+            cartItemsEl.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.quantity}x ${item.name} - S/ ${(item.price * item.quantity).toFixed(2)}`;
+            cartItemsEl.appendChild(li);
+            total += item.price * item.quantity;
+            });
+            
+            cartTotalEl.textContent = total.toFixed(2);
+        }
+        
+        // Manejo del formulario de pedido
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const orderData = {
+            customer_name: document.getElementById('customer-name').value,
+            phone: document.getElementById('customer-phone').value,
+            address: document.getElementById('delivery-address').value,
+            payment_method: document.getElementById('payment-method').value,
+            items: cart,
+            total: parseFloat(document.getElementById('cart-total').textContent),
+            status: 'pending'
+            };
+            
+            try {
+            const order = await placeOrder(orderData);
+            alert(`Pedido #${order.id} realizado con éxito!`);
+            cart = [];
+            updateCartUI();
+            } catch (error) {
+            alert('Error al realizar el pedido: ' + error.message);
+            }
+        });
+        
+        // Mostrar/ocultar QR de Yape
+        document.getElementById('payment-method').addEventListener('change', (e) => {
+            const yapeContainer = document.getElementById('yape-qr-container');
+            if (e.target.value === 'yape') {
+            yapeContainer.style.display = 'block';
+            // Generar QR dinámico con el monto
+            const total = document.getElementById('cart-total').textContent;
+            ReactDOM.render(
+                React.createElement(QRCode, {
+                value: `yape://payment?phone=999888777&amount=${total}&note=BurgosOrder`,
+                size: 128
+                }),
+                document.getElementById('yape-qr')
+            );
+            } else {
+            yapeContainer.style.display = 'none';
+            }
+        });
+        </script>
+    <!--aqui termina el sistema pedido_cliente-->
 
     <script src="js/menu.js"></script>
 </body>

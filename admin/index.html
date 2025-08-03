@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel de Administración - Burgos's</title>
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-container">
+    <header>
+    <h1>Panel de Administración</h1>
+    <button id="logout-btn">Cerrar Sesión</button>
+    </header>
+    
+    <div class="admin-sections">
+    <section id="products-section">
+        <h2>Gestión de Productos</h2>
+        <button id="add-product-btn">Agregar Producto</button>
+        <table id="products-table">
+        <thead>
+            <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        </table>
+    </section>
+    
+    <section id="orders-section">
+        <h2>Pedidos Recientes</h2>
+        <div id="orders-list"></div>
+    </section>
+    </div>
+</div>
+
+<script type="module">
+    import { supabase } from '../js/database.js';
+    import { signOut } from '../js/auth.js';
+    
+    // Verificar autenticación
+    const { user, error } = await supabase.auth.getUser();
+    
+    if (!user || user.role !== 'admin') {
+    window.location.href = '../index.html';
+    }
+    
+    // Cerrar sesión
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+    await signOut();
+    window.location.href = '../index.html';
+    });
+    
+    // Cargar productos
+    async function loadProducts() {
+    const { data, error } = await supabase
+        .from('products')
+        .select('*');
+    
+    if (error) {
+        console.error('Error loading products:', error);
+        return;
+    }
+    
+    const tbody = document.querySelector('#products-table tbody');
+    tbody.innerHTML = '';
+    
+    data.forEach(product => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+        <td>${product.name}</td>
+        <td>S/ ${product.price.toFixed(2)}</td>
+        <td>${product.category}</td>
+        <td>
+            <button class="edit-btn" data-id="${product.id}">Editar</button>
+            <button class="delete-btn" data-id="${product.id}">Eliminar</button>
+        </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    }
+    
+    // Cargar pedidos
+    async function loadOrders() {
+    const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+    if (error) {
+        console.error('Error loading orders:', error);
+        return;
+    }
+
+    const ordersList = document.getElementById('orders-list');
+    ordersList.innerHTML = '';
+    
+    data.forEach(order => {
+        const orderEl = document.createElement('div');
+        orderEl.className = 'order-card';
+        orderEl.innerHTML = `
+        <h3>Pedido #${order.id.slice(0, 8)}</h3>
+        <p><strong>Cliente:</strong> ${order.customer_name}</p>
+        <p><strong>Total:</strong> S/ ${order.total.toFixed(2)}</p>
+        <p><strong>Estado:</strong> ${order.status}</p>
+        <button class="view-order-btn" data-id="${order.id}">Ver Detalles</button>
+        `;
+        ordersList.appendChild(orderEl);
+    });
+    }
+    
+    // Inicializar
+    loadProducts();
+    loadOrders();
+    </script>
+</body>
+</html>
