@@ -1,3 +1,23 @@
+import { getActiveMenu } from './database.js';
+
+async function init() {
+    try {
+        const menu = await getActiveMenu();
+        console.log('Menú cargado:', menu);
+        // Aquí puedes renderizar el menú en tu página
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+init();
+
+
+
+
+
+
+
 // Mejorado el JS del menú hamburguesa
 document.addEventListener("DOMContentLoaded", () => {
     const hamMenu = document.querySelector(".ham-menu");
