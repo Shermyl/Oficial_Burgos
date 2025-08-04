@@ -1,5 +1,5 @@
 // Supabase
-import { supabase } from '../services/supabase.js';
+import { supabase } from '../src/services/supabase.js';
 
 /**********************
  * FUNCIONES PÚBLICAS *
