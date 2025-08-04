@@ -1,20 +1,20 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import vitePluginHtml from 'vite-plugin-html'
+import html from 'vite-plugin-html' // Cambia la importación
 
 export default defineConfig({
     plugins: [
-    vitePluginHtml({
+    html({ // Usa el plugin directamente como "html"
         inject: {
         data: {
-        title: 'Burgos\'s'
+            title: "Burgos's"
         }
-    }
+        }
     })
-],
+    ],
     resolve: {
     alias: {
-    '@': resolve(__dirname, './src')
+        '@': resolve(__dirname, './src')
     }
-}
+    }
 })

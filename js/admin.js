@@ -15,6 +15,10 @@ document.querySelector('.logout-btn').addEventListener('click', function() {
 
 
 // admin.js - Script principal del panel de administración
+import { supabase } from '../js/databasejs';
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
   // =============================================
