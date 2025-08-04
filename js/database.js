@@ -101,54 +101,54 @@ export async function getAllProducts() {
 
 // Crear/actualizar producto (admin)
 export async function saveProduct(productData) {
-  if (productData.id) {
+    if (productData.id) {
     // Actualizar producto existente
     const { data, error } = await supabase
-      .from('products')
-      .update(productData)
-      .eq('id', productData.id)
-      .select();
+        .from('products')
+        .update(productData)
+        .eq('id', productData.id)
+        .select();
 
     return handleSaveResponse(data, error);
-  } else {
+    } else {
     // Crear nuevo producto
     productData.created_at = new Date().toISOString();
     const { data, error } = await supabase
-      .from('products')
-      .insert([productData])
-      .select();
+        .from('products')
+        .insert([productData])
+        .select();
 
     return handleSaveResponse(data, error);
-  }
+    }
 }
 
 // Subir imagen a Supabase Storage
 export async function uploadImage(imageFile, path = 'productos') {
-  const fileExt = imageFile.name.split('.').pop();
-  const fileName = `${Math.random()}.${fileExt}`;
-  const fullPath = `${path}/${fileName}`;
+    const fileExt = imageFile.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const fullPath = `${path}/${fileName}`;
 
-  const { data, error } = await supabase.storage
+    const { data, error } = await supabase.storage
     .from('images')
     .upload(fullPath, imageFile);
 
-  if (error) {
+    if (error) {
     console.error('Error subiendo imagen:', error);
     throw error;
-  }
+    }
 
-  return supabase.storage
+    return supabase.storage
     .from('images')
     .getPublicUrl(data.path);
 }
 
 // Función auxiliar para respuestas
 function handleSaveResponse(data, error) {
-  if (error) {
+    if (error) {
     console.error('Error guardando producto:', error);
     throw error;
-  }
-  return data[0];
+    }
+    return data[0];
 }
 
 // Exportar supabase como único nombre (evita duplicados)
