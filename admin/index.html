@@ -126,6 +126,14 @@
     import { supabase } from '../js/database.js';  // ✅ Correcto
     import '../js/auth.js';  // ❌ Debería importar funciones específicas
     </script>
+
+    <script type="module">
+    import { supabase } from '../js/database.js';
+    import { login, signOut } from '../js/auth.js';  // Importar funciones específicas
+    
+
+    </script>
+
     <!-- Incluir Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Tus scripts -->
