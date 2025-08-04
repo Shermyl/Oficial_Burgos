@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Burgos's Restaurant</title>
+    <link rel="stylesheet" href="css/reservas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <div class="reserva-container">
+        <h2>Reserva</h2>
+        
+        <form id="reservaForm">
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <select id="hora" required>
+                    <option value="">Seleccione hora</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="19:00">7:00 PM</option>
+                    <option value="20:00">8:00 PM</option>
+                    <option value="21:00">9:00 PM</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="invitados">Invitados:</label>
+                <select id="invitados" required>
+                    <option value="">Seleccione cantidad</option>
+                    <option value="1">1 persona</option>
+                    <option value="2">2 personas</option>
+                    <option value="3">3 personas</option>
+                    <option value="4">4 personas</option>
+                    <option value="5">5 personas</option>
+                    <option value="6">6 personas</option>
+                    <option value="7">7+ personas</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="comentarios">Comentarios (opcional):</label>
+                <textarea id="comentarios" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-reservar">Completar Reserva</button>
+        </form>
+        
+        <div id="calendarioReservas"></div>
+    </div>
+
+    <script src="js/reservas.js" type="module"></script>
+</body>
+</html>

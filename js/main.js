@@ -1,28 +1,96 @@
 import { getActiveMenu } from './database.js';
 
-async function init() {
+// --------------------------
+// Funciones Principales
+// --------------------------
+
+/**
+ * Carga y muestra el menú desde Supabase
+ */
+async function loadAndDisplayMenu() {
     try {
         const menu = await getActiveMenu();
         console.log('Menú cargado:', menu);
-        // Aquí puedes renderizar el menú en tu página
+        renderMenuItems(menu);
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error cargando menú:', error);
+        showError('Error al cargar el menú');
     }
 }
 
-init();
+/**
+ * Renderiza los items del menú en el DOM
+ * @param {Array} menuItems - Array de productos del menú
+ */
+function renderMenuItems(menuItems) {
+    const menuContainer = document.getElementById('menu-container');
+    if (!menuContainer) return;
 
+    menuContainer.innerHTML = menuItems.map(item => `
+        <div class="menu-item">
+            <img src="${item.image_url || 'img/placeholder.jpg'}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>${item.description || ''}</p>
+            <span>S/ ${item.price.toFixed(2)}</span>
+            <button class="add-to-cart" data-id="${item.id}">Añadir al Carrito</button>
+        </div>
+    `).join('');
 
+    // Agregar event listeners a los botones
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', addToCartHandler);
+    });
+}
 
+// --------------------------
+// Manejo del Carrito
+// --------------------------
 
+const cart = {
+    items: [],
+    addItem(item) {
+        const existing = this.items.find(i => i.id === item.id);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            this.items.push({...item, quantity: 1});
+        }
+        this.updateCartUI();
+    },
+    updateCartUI() {
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+        
+        if (cartCount) {
+            cartCount.textContent = this.items.reduce((sum, item) => sum + item.quantity, 0);
+        }
+        
+        if (cartTotal) {
+            const total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toFixed(2);
+        }
+    }
+};
 
+function addToCartHandler(event) {
+    const itemId = event.target.dataset.id;
+    const item = getItemDetails(itemId); // Implementar según tu estructura
+    if (item) {
+        cart.addItem(item);
+        showToast(`${item.name} añadido al carrito`);
+    }
+}
 
+// --------------------------
+// Menú Hamburguesa (Mobile)
+// --------------------------
 
-// Mejorado el JS del menú hamburguesa
-document.addEventListener("DOMContentLoaded", () => {
+function setupMobileMenu() {
     const hamMenu = document.querySelector(".ham-menu");
     const navLinks = document.querySelector(".nav-links");
     const body = document.body;
+
+    if (!hamMenu || !navLinks) return;
 
     hamMenu.addEventListener("click", () => {
         hamMenu.classList.toggle("active");
@@ -41,217 +109,48 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-});
+}
 
+// --------------------------
+// Utilidades
+// --------------------------
 
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }, 100);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-// Mantener el nav-bar fijo al hacer scroll
-document.addEventListener("scroll", () => {
-    const navBar = document.querySelector(".nav-bar");
-    if (window.scrollY > 0) {
-        navBar.style.cssText = `
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            background-color: var(--blanco);
-            box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
-        `;
-    } else {
-        navBar.style.cssText = `
-            position: relative;
-            box-shadow: none;
-        `;
+function showError(message) {
+    const errorEl = document.getElementById('error-message');
+    if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        setTimeout(() => errorEl.style.display = 'none', 5000);
     }
-});
+}
 
-// Hamburger Menu Toggle
+// --------------------------
+// Inicialización
+// --------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
-    const hamMenu = document.querySelector(".ham-menu");
-    const navLinks = document.querySelector(".nav-links");
-
-    hamMenu.addEventListener("click", () => {
-        hamMenu.classList.toggle("active");
-        navLinks.classList.toggle("active");
-    });
-});*/
-
-/*// Mostrar el preloader al cargar la página (esto ya estaba asi xd)
-document.addEventListener("DOMContentLoaded", () => {
-    const preloader = document.querySelector(".preloader");
-    if (preloader) {
-        preloader.style.display = "none"; // Ocultar el preloader
-    }
-});*/
-
-// Ajustar elementos al cargar la página
-/*
-document.addEventListener("DOMContentLoaded", () => {
-    const bubbleImg = document.querySelector(".bubble_img");
-    const fondoImg = document.querySelector(".fondo_img");
-
-    if (bubbleImg) {
-        bubbleImg.style.transform = "translate(10%, -10%)";
-    }
-
-    if (fondoImg) {
-        fondoImg.style.opacity = "0.9";
-    }
-});
-
-
-//--------------------------------------->contenedor 3_biotienda
-// Agregar interacción al botón "COMPRAR"
-document.addEventListener("DOMContentLoaded", () => {
-    const botonesComprar = document.querySelectorAll(".btn-comprar");
-
-    botonesComprar.forEach((boton) => {
-        boton.addEventListener("click", () => {
-            const producto = boton.getAttribute("data-producto");
-            alert(`Has añadido "${producto}" a tu carrito.`);
-        });
-    });
-});
-
-
-//--------------------------------------->contenedor 4_biotienda_galeria
-// Filtros de galería
-document.querySelectorAll('.galeria-filtro').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.galeria-filtro').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const filtro = this.getAttribute('data-filter');
-        document.querySelectorAll('.galeria-item').forEach(item => {
-            if (filtro === 'todos' || item.getAttribute('data-cat') === filtro) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-});
-
-// Modal de imagen
-const modal = document.getElementById('galeriaModal');
-const modalImg = document.getElementById('modalImg');
-document.querySelectorAll('.galeria-item img').forEach(img => {
-    img.addEventListener('click', function() {
-        modal.classList.add('active');
-        modalImg.src = this.src;
-        modalImg.alt = this.alt;
-    });
-});
-document.getElementById('cerrarModal').onclick = function() {
-    modal.classList.remove('active');
-};
-modal.onclick = function(e) {
-    if (e.target === modal) modal.classList.remove('active');
-};
-
-
-//--------------------------------------->contenedor 5_biotienda
-//calendario xd 
-document.addEventListener("DOMContentLoaded", () => {
-    const calendarTable = document.querySelector(".calendar-table tbody");
-    const monthYear = document.querySelector(".month-year");
-    const prevMonth = document.querySelector(".prev-month");
-    const nextMonth = document.querySelector(".next-month");
-
-    const months = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-
-    let currentDate = new Date();
-
-    function renderCalendar() {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-        monthYear.textContent = `${months[month]} ${year}`;
-        calendarTable.innerHTML = "";
-
-        let date = 1;
-        let prevDate = daysInPrevMonth - firstDay + 1;
-
-        for (let i = 0; i < 6; i++) {
-            const row = document.createElement("tr");
-            for (let j = 0; j < 7; j++) {
-                const cell = document.createElement("td");
-
-                if (i === 0 && j < firstDay) {
-                    // Días del mes anterior
-                    cell.textContent = prevDate++;
-                    cell.classList.add("other-month");
-                } else if (date > daysInMonth) {
-                    // Días del mes siguiente
-                    cell.textContent = date - daysInMonth;
-                    cell.classList.add("other-month");
-                    date++;
-                } else {
-                    // Días del mes actual
-                    cell.textContent = date;
-                    cell.addEventListener("click", () => {
-                        document.querySelectorAll(".calendar-table td").forEach(td => td.classList.remove("selected"));
-                        cell.classList.add("selected");
-                    });
-                    date++;
-                }
-                row.appendChild(cell);
-            }
-            calendarTable.appendChild(row);
+    loadAndDisplayMenu();
+    setupMobileMenu();
+    
+    // Navbar fijo al hacer scroll
+    window.addEventListener('scroll', () => {
+        const navBar = document.querySelector('.nav-bar');
+        if (navBar) {
+            navBar.classList.toggle('fixed', window.scrollY > 0);
         }
-    }
-
-    prevMonth.addEventListener("click", () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
     });
-
-    nextMonth.addEventListener("click", () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    });
-
-    renderCalendar();
 });
-*/
