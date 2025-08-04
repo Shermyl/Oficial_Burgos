@@ -1,20 +1,12 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import html from 'vite-plugin-html' // Cambia la importación
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
 export default defineConfig({
-    plugins: [
-    html({ // Usa el plugin directamente como "html"
-        inject: {
-        data: {
-            title: "Burgos's"
-        }
-        }
-    })
-    ],
+  plugins: [react()], // <-- Solo esto
     resolve: {
     alias: {
         '@': resolve(__dirname, './src')
     }
-    }
-})
+}
+});
