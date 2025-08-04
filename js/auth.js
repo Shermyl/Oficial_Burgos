@@ -3,6 +3,26 @@ const supabaseUrl = 'https://hplcdirshmszavpfqcyy.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbGNkaXJzaG1zemF2cGZxY3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQyNTIxODksImV4cCI6MjA2OTgyODE4OX0.PPCsbjn_LO9k_wuHsn0BUQ78EMkGMdC5bGaBGdotYZM';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+
+
+
+import { supabase } from './database.js';
+export async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+    });
+
+    if (error) throw error;
+    return data;
+}
+
+export async function signOut() {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+}
+
+
 // --------------------------
 // Funciones de Autenticación
 // --------------------------
