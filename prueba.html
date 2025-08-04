@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba Supabase Funcional</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { padding: 10px 15px; background: #3b82f6; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #2563eb; }
+        pre { background: #f3f4f6; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Prueba Supabase</h1>
+    <button id="btnConsultar">Consultar Datos</button>
+    <pre id="resultado">Los resultados aparecerán aquí...</pre>
+
+    <script>
+        // ⚠️ IMPORTANTE: Cambia estos valores por los TUS credenciales reales
+        const SUPABASE_URL = 'https://hplcdirshmszavpfqcyy.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbGNkaXJzaG1zemF2cGZxY3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQyNTIxODksImV4cCI6MjA2OTgyODE4OX0.PPCsbjn_LO9k_wuHsn0BUQ78EMkGMdC5bGaBGdotYZM';
+        
+        // Inicialización CORRECTA de Supabase (con nombre de variable global)
+        window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.getElementById('btnConsultar').addEventListener('click', async () => {
+            try {
+                // Cambia 'productos' por tu tabla real
+                const { data, error } = await window.supabase
+                    .from('productos')
+                    .select('*');
+                
+                const resultadoElement = document.getElementById('resultado');
+                if (error) {
+                    resultadoElement.innerHTML = `<span style="color: red">ERROR: ${error.message}</span>`;
+                    console.error(error);
+                } else {
+                    resultadoElement.textContent = JSON.stringify(data, null, 2);
+                    console.log("Datos obtenidos:", data);
+                }
+            } catch (err) {
+                console.error("Error inesperado:", err);
+                document.getElementById('resultado').textContent = `Error: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

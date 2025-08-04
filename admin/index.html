@@ -121,17 +121,13 @@
 
 
 
-    <!-- Las dependencias deben cargarse primero -->
-    <script type="module">
-    import { supabase } from '../js/database.js';  // ✅ Correcto
-    import '../js/auth.js';  // ❌ Debería importar funciones específicas
-    </script>
+
 
     <script type="module">
     import { supabase } from '../js/database.js';
     import { login, signOut } from '../js/auth.js';  // Importar funciones específicas
     
-
+    // Tu código de administración aquí
     </script>
 
     <!-- Incluir Supabase -->
