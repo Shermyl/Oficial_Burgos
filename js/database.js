@@ -1,6 +1,21 @@
 // Supabase
-import { supabase } from '../src/services/supabase.js';
+import { createClient } from '@supabase/supabase-js'
 
+const supabase = createClient(
+    'https://hplcdirshmszavpfqcyy.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbGNkaXJzaG1zemF2cGZxY3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQyNTIxODksImV4cCI6MjA2OTgyODE4OX0.PPCsbjn_LO9k_wuHsn0BUQ78EMkGMdC5bGaBGdotYZM'
+)
+
+
+export async function placeOrder(orderData) {
+  // Lógica para guardar pedidos
+    const { data, error } = await supabase
+    .from('pedidos')
+    .insert([orderData])
+    return { data, error }
+}
+
+export { supabase, placeOrder }
 /**********************
  * FUNCIONES PÚBLICAS *
  **********************/
